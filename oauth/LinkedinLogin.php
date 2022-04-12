@@ -1,6 +1,5 @@
 <?php
 
-<?php
 $config = [
     'callback' => '',
     'enabled' => TRUE,
@@ -8,12 +7,12 @@ $config = [
         'id' => '',
         'secret' => '',
     ],
-    'scopes' => array('r_liteprofile', 'r_emailaddress', 'w_member_social', 'r_fullprofile')
+    'scopes' => array('r_liteprofile', 'r_emailaddress', 'w_member_social')
 ];
 
 $authurl = 'https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=' . $config['keys']['id'] . '&redirect_uri=' . urlencode($config['callback']) . '&state=SignupAuth&scope=' . urlencode(implode(" ", $config['scopes']));
 
-if ($_SERVER['REQUEST_METHOD'] == 'GET' && empty($_GET['code'])) {
+if ($_SERVER['REQUEST_METHOD'] == 'GET' && empty($_GET['code']) && empty($_GET['error'])) {
     echo '<script>window.location.href = "' . $authurl . '"</script>';
 }
 
@@ -73,5 +72,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_GET['code'])) {
 
     curl_close($emailcrl);
 
-    echo $userEmail;
+    $meUrl = 'https://api.linkedin.com/v2/me';
+    $meCrl = curl_init();
+
+    curl_setopt($meCrl, CURLOPT_URL, $meUrl);
+    curl_setopt($meCrl, CURLOPT_FRESH_CONNECT, true);
+    curl_setopt($meCrl, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($meCrl, CURLOPT_HTTPHEADER, array("Authorization: Bearer ".$accessToken));
+
+    $me_response = curl_exec($meCrl);
+
+    $meData = json_decode($me_response,true);
+
+    curl_close($meCrl);
+
+    // Display data
+    echo '<p>' . $accessToken . '</p>';
+    echo '<span>' . json_encode($meData, JSON_PRETTY_PRINT) . '</span>';
+    echo '<p>' . $userEmail . '</p>';
+    echo '<p>' . $userName . '</p>';
+    echo '<p>' . $userProfilePic . '</p>';
+}
+
+if (!empty($_GET['error'])) {
+    echo $_GET['error'];
 }
