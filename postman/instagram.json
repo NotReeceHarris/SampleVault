@@ -1,0 +1,52 @@
+{
+	"info": {
+		"_postman_id": "7ac23139-cbb8-4305-8f1f-7dac46db8d03",
+		"name": "Instagram Display Api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21168650"
+	},
+	"item": [
+		{
+			"name": "Me",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Account Display Info",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Post",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Media",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "version",
+			"value": "v14.0"
+		},
+		{
+			"key": "token",
+			"value": "Your Token"
+		}
+	]
+}
