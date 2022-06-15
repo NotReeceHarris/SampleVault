@@ -10,7 +10,31 @@
 			"name": "Me",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "https://graph.instagram.com/{{version}}/me?access_token={{token}}",
+					"protocol": "https",
+					"host": [
+						"graph",
+						"instagram",
+						"com"
+					],
+					"path": [
+						"{{version}}",
+						"me"
+					],
+					"query": [
+						{
+							"key": "fields",
+							"value": "{fields}",
+							"disabled": true
+						},
+						{
+							"key": "access_token",
+							"value": "{{token}}"
+						}
+					]
+				}
 			},
 			"response": []
 		},
@@ -18,7 +42,40 @@
 			"name": "Account Display Info",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "https://graph.instagram.com/:api-version/:user-id?fields=media_count, media&access_token={{token}}",
+					"protocol": "https",
+					"host": [
+						"graph",
+						"instagram",
+						"com"
+					],
+					"path": [
+						":api-version",
+						":user-id"
+					],
+					"query": [
+						{
+							"key": "fields",
+							"value": "media_count, media"
+						},
+						{
+							"key": "access_token",
+							"value": "{{token}}"
+						}
+					],
+					"variable": [
+						{
+							"key": "api-version",
+							"value": "{{version}}"
+						},
+						{
+							"key": "user-id",
+							"value": null
+						}
+					]
+				}
 			},
 			"response": []
 		},
@@ -26,7 +83,37 @@
 			"name": "Post",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "https://graph.instagram.com/:version/:user-id/media?access_token={{token}}",
+					"protocol": "https",
+					"host": [
+						"graph",
+						"instagram",
+						"com"
+					],
+					"path": [
+						":version",
+						":user-id",
+						"media"
+					],
+					"query": [
+						{
+							"key": "access_token",
+							"value": "{{token}}"
+						}
+					],
+					"variable": [
+						{
+							"key": "version",
+							"value": "{{version}}"
+						},
+						{
+							"key": "user-id",
+							"value": "8158290520877658"
+						}
+					]
+				}
 			},
 			"response": []
 		},
@@ -34,9 +121,57 @@
 			"name": "Media",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "https://graph.instagram.com/:media-id?fields=media_url,permalink,caption&access_token={{token}}",
+					"protocol": "https",
+					"host": [
+						"graph",
+						"instagram",
+						"com"
+					],
+					"path": [
+						":media-id"
+					],
+					"query": [
+						{
+							"key": "fields",
+							"value": "media_url,permalink,caption"
+						},
+						{
+							"key": "access_token",
+							"value": "{{token}}"
+						}
+					],
+					"variable": [
+						{
+							"key": "media-id",
+							"value": "17872924709644859"
+						}
+					]
+				}
 			},
 			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		}
 	],
 	"variable": [
@@ -46,7 +181,7 @@
 		},
 		{
 			"key": "token",
-			"value": "Your Token"
+			"value": "your token"
 		}
 	]
 }
